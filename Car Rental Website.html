@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental Hub</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+.gradient-text {
+    background: linear-gradient(to right, #ffdd00, #ff9900);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero h1 {
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8), -2px -2px 5px rgba(0, 0, 0, 0.6);
+  }
+  
+  .car-card {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.car-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Remove the old car-container styles */
+.car-container {
+  display: none;
+}
+
+
+/* Background images for each car */
+#car1 {
+  background-image: url('https://images.forbesindia.com/media/images/2023/Nov/img_222889_punch.jpg');
+}
+
+#car2 {
+  background-image: url('https://cdni.autocarindia.com/utils/ImageResizer.ashx?n=https://cms.haymarketindia.net/model/uploads/modelimages/Mahindra-XUV-3XO-290420241902.jpg&w=872&h=578&q=75&c=1');
+}
+
+#car3 {
+  background-image: url('https://stimg.cardekho.com/images/carexteriorimages/630x420/Tata/Nexon/11104/1697698470038/front-left-side-47.jpg?imwidth=420&impolicy=resize');
+}
+
+#car4 {
+  background-image: url('https://electricvehicles.in/wp-content/uploads/2018/06/electric-vehicles-in-india.png');
+}
+
+#car5 {
+  background-image: url('https://media.zigcdn.com/media/model/2024/Jul/tata-curvv_360x240.jpg');
+}
+
+#car6 {
+  background-image: url('https://cdni.autocarindia.com/Utils/ImageResizer.ashx?n=https://cdni.autocarindia.com/ExtraImages/20231004123532_TATA%20HARRIER%20copy.JPG');
+}
+
+#car7 {
+  background-image: url('https://gaadiwaadi.com/wp-content/uploads/2023/10/tata-harrier-facelift-17-218x150.jpg');
+}
+
+#car8 {
+  background-image: url('https://images.hindustantimes.com/auto/img/2021/09/28/600x338/The_new_Fortuner_1612434351774_1612434358960_1632807301099.JPG');
+}
+
+#car9 {
+  background-image: url('https://cdn.zeebiz.com/sites/default/files/styles/zeebiz_850x478/public/2019/11/19/105565-spresso.jpg?itok=wRfMpF9Z');
+}
+
+#car10 {
+  background-image: url('https://vehicle-images.dealerinspire.com/f2ac-18003493/thumbnails/large/SALCP2FX5PH334523/d67232878fee42e9de842957616ebad2.jpg');
+}
+
+/* Styling for button */
+button {
+  position: absolute; /* Position button inside the card */
+  bottom: 10px; /* 10px from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Offset for exact center */
+  padding: 8px 12px;
+  background-color: rgba(0, 123, 255, 0.8); /* Slightly transparent background */
+  color: #fff;
+  border: none;
+  border-radius: 4px; /* Optional: Round button corners */
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(0, 123, 255, 1); /* Full opacity on hover */
+}
+
+
+    /* Colorful shadow and hover effects */
+    .category-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar with Gradient Background (Fixed at the top) -->
+<nav class="bg-gradient-to-r from-gray-900 to-black p-4 text-white flex justify-between shadow-lg fixed top-0 left-0 w-full z-50">
+  <div class="text-lg font-bold">CarRentalHub</div>
+  <div>
+    <ul class="flex space-x-4">
+      <li><a href="#" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="#" class="hover:text-yellow-400">Rent a Car</a></li>
+      <li><a href="#" class="hover:text-yellow-400">Pricing</a></li>
+      <li><a href="#" class="hover:text-yellow-400">Offers</a></li>
+      <li><a href="#" class="hover:text-yellow-400">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- Hero Section with Parallax Effect -->
+<section class="hero h-screen bg-fixed bg-center bg-cover flex flex-col justify-center items-center text-white" style="background-image: url('https://t4.ftcdn.net/jpg/03/08/44/53/360_F_308445331_ZZinysRse5xOZacNTnoQqG24TAy7ftZ5.jpg');">
+  <h1 class="text-6xl font-extrabold mb-4">Rent Your Dream Car Today</h1>
+  <p class="text-2xl mb-8">Affordable, Fast, and Convenient Car Rentals</p>
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-full shadow-lg">Book Now</button>
+</section>
+
+<!-- Content Section -->
+<section class="py-16 bg-white text-center">
+  <h2 class="text-4xl font-bold">Find Your Ideal Vehicle</h2>
+  <p class="text-gray-600 mb-8">Browse through our range of vehicles to find the perfect match for your needs.</p>
+  
+  <!-- Grid Container -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto px-4">
+    <!-- Car Card 1 -->
+    <div class="car-card" id="car1">
+      <button onclick="bookNow(0)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 2 -->
+    <div class="car-card" id="car2">
+      <button onclick="bookNow(1)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 3 -->
+    <div class="car-card" id="car3">
+      <button onclick="bookNow(2)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 4 -->
+    <div class="car-card" id="car4">
+      <button onclick="bookNow(3)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 5 -->
+    <div class="car-card" id="car5">
+      <button onclick="bookNow(4)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 6 -->
+    <div class="car-card" id="car6">
+      <button onclick="bookNow(5)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 7 -->
+    <div class="car-card" id="car7">
+      <button onclick="bookNow(6)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 8 -->
+    <div class="car-card" id="car8">
+      <button onclick="bookNow(7)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 9 -->
+    <div class="car-card" id="car9">
+      <button onclick="bookNow(8)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+    
+    <!-- Car Card 10 -->
+    <div class="car-card" id="car10">
+      <button onclick="bookNow(9)" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 bg-gray-100">
+  <div class="text-center mb-8">
+    <h2 class="text-4xl font-bold text-gray-900">Explore Our SUVs & Luxury Sedans</h2>
+    <p class="mt-2 text-gray-600">Experience the thrill and luxury of our top-rated vehicles</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+    <!-- SUV Card 1 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://gaadiwaadi.com/wp-content/uploads/2022/10/Honda-Prologue-electric-SUV-Rear.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="SUV 1">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">Honda Prologue</h3>
+        <p class="text-lg text-yellow-400">From ₹54,900.00*</p>
+        <p class="mt-2 text-gray-200">Electric SUV with cutting-edge technology and spacious interiors.</p>
+      </div>
+    </div>
+
+    <!-- SUV Card 2 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://global.toyota/pages/news/images/2021/08/02/1330/001.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="SUV 2">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">Toyota Land Cruiser</h3>
+        <p class="text-lg text-yellow-400">From ₹89,900.00*</p>
+        <p class="mt-2 text-gray-200">Rugged and luxurious, perfect for off-road adventures.</p>
+      </div>
+    </div>
+
+    <!-- SUV Card 3 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Lamborghini/Urus/10635/1724844423793/front-left-side-47.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="SUV 3">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">Lamborghini Urus</h3>
+        <p class="text-lg text-yellow-400">From ₹1,49,900.00*</p>
+        <p class="mt-2 text-gray-200">High-performance luxury SUV for those who seek thrill and style.</p>
+      </div>
+    </div>
+
+    <!-- Luxury Sedan Card 1 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://bmw.scene7.com/is/image/BMW/ALUMINIUM_SATINATED_ALU_SATIN_G68_AL_SA_7?wid=3000&hei=3000" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="Sedan 1">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">BMW 5 Series</h3>
+        <p class="text-lg text-yellow-400">From ₹99,900.00*</p>
+        <p class="mt-2 text-gray-200">A luxurious sedan that combines comfort and performance.</p>
+      </div>
+    </div>
+
+    <!-- Luxury Sedan Card 2 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://imgd.aeplcdn.com/1280x720/cw/ec/21724/Audi-R8-Right-Front-Three-Quarter-66713.jpg?v=20160802170030&t=170030343&t=170030343&q=80" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="Sedan 2">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">Audi A8</h3>
+        <p class="text-lg text-yellow-400">From ₹1,09,900.00*</p>
+        <p class="mt-2 text-gray-200">A premium luxury sedan offering ultimate comfort and elegance.</p>
+      </div>
+    </div>
+
+    <!-- SUV Card 3 -->
+    <div class="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg group">
+      <img src="https://www.popsci.com/wp-content/uploads/2024/07/ioniq-5-n-hero.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" alt="Sedan 2">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white">Hyundai SUV</h3>
+        <p class="text-lg text-yellow-400">From ₹1,19,900.00*</p>
+        <p class="mt-2 text-gray-200">A premium luxury sedan offering ultimate comfort and elegance.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CSS for Parallax Effect -->
+<style>
+  .hero {
+    background-attachment: fixed; /* Enables the parallax effect */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+
+<!-- CSS for Parallax Effect -->
+<style>
+  .parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+
+  <!-- Featured Offers Section -->
+  <section class="py-12 bg-gray-100 text-white text-center">
+    <h2 class="text-4xl font-bold mb-8">Exclusive Offers for You:</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="offer-card bg-white text-black rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold">Weekend Special</h3>
+        <p class="mt-4">Rent any car at 20% off this weekend!</p>
+      </div>
+      <div class="offer-card bg-white text-black rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold">Luxury Rentals</h3>
+        <p class="mt-4">Drive a luxury car for less. 15% off premium models.</p>
+      </div>
+      <div class="offer-card bg-white text-black rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold">Electric Car Discounts</h3>
+        <p class="mt-4">Save the environment and your wallet. 10% off electric cars.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews Section -->
+<section class="py-12 bg-white">
+  <div class="text-center mb-8">
+    <h2 class="text-4xl font-bold text-gray-900">What Our Customers Say?</h2>
+    <p class="mt-2 text-gray-600">Real reviews from real people</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <!-- Review 1 -->
+    <div class="review-card bg-gray-100 shadow-lg rounded-lg p-6">
+      <h3 class="text-xl font-bold">Nitin Pandey</h3>
+      <p class="mt-2 text-gray-600">"The SUV I rented was fantastic! Great service and hassle-free experience!"</p>
+      <div class="mt-4 text-yellow-400">
+        ★★★★☆
+      </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="review-card bg-gray-100 shadow-lg rounded-lg p-6">
+      <h3 class="text-xl font-bold">Sanjay Kala</h3>
+      <p class="mt-2 text-gray-600">"Loved the electric car rental option. Smooth ride and eco-friendly."</p>
+      <div class="mt-4 text-yellow-400">
+        ★★★★★
+      </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="review-card bg-gray-100 shadow-lg rounded-lg p-6">
+      <h3 class="text-xl font-bold">Prakash Yadav</h3>
+      <p class="mt-2 text-gray-600">"Customer support was amazing. Will definitely rent from here again!"</p>
+      <div class="mt-4 text-yellow-400">
+        ★★★★☆
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- Footer -->
+ <footer class="bg-gradient-to-r from-gray-900 to-black text-white py-6">
+  <div class="container mx-auto flex flex-col md:flex-row justify-between">
+    <div>
+      <h3 class="text-lg font-bold">CarRentalHub</h3>
+      <p class="text-sm">© 2024 CarRentalHub. All rights reserved.</p>
+    </div>
+    <div class="flex flex-col md:flex-row md:items-center">
+      <ul class="flex space-x-4 mb-2 md:mb-0">
+        <li><a href="#" class="hover:text-yellow-400" aria-label="Privacy Policy">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-yellow-400" aria-label="Terms of Service">Terms of Service</a></li>
+        <li><a href="#" class="hover:text-yellow-400" aria-label="Support">Support</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- JavaScript for Category Navigation -->
+  <script>
+    const categories = document.querySelectorAll('.category-card');
+    let currentIndex = 0;
+
+    function showCategory(index) {
+      categories.forEach((category, i) => {
+        category.classList.remove('active');
+        if (i === index) {
+          category.classList.add('active');
+        }
+      });
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex === 0) ? categories.length - 1 : currentIndex - 1;
+      showCategory(currentIndex);
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex === categories.length - 1) ? 0 : currentIndex + 1;
+      showCategory(currentIndex);
+    });
+  </script>
+</body>
+</html>
