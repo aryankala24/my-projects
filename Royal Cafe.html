@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Cafe - Hazratganj, Lucknow</title>
+    <link rel="stylesheet" href="styles.css">
+
+<style>
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 80px;
+    background-color: #00000056;
+    color: rgb(255, 239, 18);
+}
+
+header {
+    font-family: cursive;
+    color: rgb(255, 152, 18);
+    background-color: #000000;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.social-icons, .delivery-links {
+    font-size: 1.5em;
+}
+
+.social-icons a, .delivery-links a {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.auth-buttons button {
+    margin-left: 15px;
+    padding: 10px 15px;
+    background-color: rgb(19, 134, 54);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.auth-buttons input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.mySlides {
+    display: none;
+}
+
+.cover-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.offer {
+    background-color: #000000;
+    color: rgb(255, 152, 18);
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.why-choose ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+}
+
+.why-choose li {
+    margin: 10px 0; /* Space between items */
+    background-color: rgba(255, 152, 18, 0.2); /* Light background color */
+    padding: 10px; /* Padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.why-choose li:hover {
+    background-color: rgba(255, 152, 18, 0.4); /* Darker on hover */
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.booking-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+    min-width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    background-color: rgb(161, 58, 17);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.reviews h2 {
+    color: rgb(126, 34, 6); 
+}
+
+input, button {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: rgb(19, 134, 54);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.specialties {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.specialty {
+    background: rgb(204, 72, 36);
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.testimonials {
+    background-color: rgb(231, 135, 57);
+    color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.reviews {
+    background-color: rgba(252, 92, 0, 0.356);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.review {
+    margin-bottom: 20px;
+}
+
+.stars {
+    color: gold;
+    font-size: 1.5em;
+}
+
+footer {
+    background-color: #000000; /* Changed to black */
+    color: yellow;
+    padding: 20px; 
+    text-align: left;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #000;
+    color: yellow;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    text-align: center; /* Centers the content */
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+}
+
+.footer-section img {
+    width: 40px;
+    margin: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    color: yellow;
+    background-color: #000;
+}
+
+.location-map iframe {
+    border: 0;
+    width: 100%;
+    height: 200px;
+}
+
+.footer-location, .footer-contact, .footer-social {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px; /* Ensures responsiveness */
+}
+
+.footer-location h3, .footer-contact h3, .footer-social h3 {
+    margin-bottom: 10px;
+}
+
+.footer-social a:hover {
+    text-decoration: underline;
+}
+
+.footer-gmail p a {
+    color: whitesmoke; /* This will make the link text white */
+}
+
+.footer-hours {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px; /* Ensures responsiveness */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    color: yellow; /* This will make the text yellow */
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: rgb(255, 152, 18);
+}
+
+.review-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-container {
+    margin-left: 20px; /* Space between social icons and search bar */
+}
+
+#searchBar {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+
+.review-box h2 {
+    margin-bottom: 10px;
+}
+
+.review-box textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 100px;
+}
+
+.stars {
+    cursor: pointer;
+    color: gold;
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: gold;
+}
+
+button {
+    background-color: rgb(19, 134, 54);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .specialty {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-section {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .specialties {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .specialty {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .social-icons, .delivery-links {
+        font-size: 1.2em;
+    }
+
+    .offer, .reviews, .booking-section {
+        padding: 10px;
+    }
+
+    .specialty {
+        width: 100%;
+    }
+    .specialties h1 {
+    color: rgb(255, 152, 18); /* Customize color */
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+    .stars {
+        font-size: 1.2em;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>
+        <img src="C:\Users\hp\Pictures\HTML Images\images-removebg-preview.png" alt="Royal Cafe Logo" style="height: 80px;"> <!-- Adjust height as needed -->
+    </h1>
+
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search..." onkeyup="filterSpecialties()">
+    </div>
+
+    <div class="social-icons">
+        <a target="_blank" href="https://www.instagram.com/royalcafe_lucknow/?hl=en">
+            <img alt="instagram" loading="lazy" width="50" height="50" decoding="async" style="color:transparent" src="C:\Users\hp\Pictures\HTML Images\download__1_-removebg-preview.png"></a>
+        <a target="_blank" href="https://www.facebook.com/royalcafe.lucknow/"><img alt="facebook" loading="lazy" width="50" height="50" decoding="async" style="color:transparent" src="C:\Users\hp\Pictures\HTML Images\download__2_-removebg-preview.png"></a>
+        <a target="_blank" href="https://youtu.be/2SYDvjnX7xU?si=WawqfCgmy7J8D7HL"><img alt="youtube" loading="lazy" width="50" height="50" decoding="async" style="color:transparent" src="C:\Users\hp\Pictures\HTML Images\hd-youtube-logo-png-transparent-background-20-removebg-preview.png"></a>
+    </div> 
+
+    <div class="auth-buttons"></div>
+        <button id="signInButton" onclick="toggleSignIn()">Sign In</button>
+        <div id="signInForm" style="display:none;">
+            <input type="text" id="username" placeholder="Username" required>
+            <button id="loginButton" onclick="signIn()">Log In</button>
+            <button onclick="toggleSignIn()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="delivery-links">
+        <a target="_blank" href="https://www.swiggy.com/city/lucknow/royal-cafe-hazratganj-rest59950">
+            <img src="C:\Users\hp\Pictures\HTML Images\aa61p7yn1-removebg-preview.png" alt="Swiggy" style="height: 60px; margin-left: 15px;">
+        </a>
+        <a target="_blank" href="https://www.zomato.com/lucknow/royal-cafe-hazratganj">
+            <img src="C:\Users\hp\Pictures\HTML Images\f434e30f1c5a170fc4700661cc99c3ab-removebg-preview.png" alt="Zomato" style="height: 60px; margin-left: 15px;">
+        </a>
+    </div>
+</header>
+
+<div class="slideshow-container">
+    <div class="mySlides">
+        <img src="https://www.lucknowportal.com/wp-content/uploads/Royal-Cafe-Hazratganj-Lucknow.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://www.lucknowportal.com/wp-content/uploads/Hardayal-Maurya-or-Chhotu-Bhaiya-or-Chotu-Chaatwala.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://b.zmtcdn.com/data/pictures/0/800630/001e9a7bd08d7aee7c8d61b25771c0f1.jpeg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://b.zmtcdn.com/data/pictures/chains/2/800652/d598e12c4faf6bd90d5edce31155b86a.jpg?fit=around|960:500&crop=960:500;*,*" style="width:100%; height:600px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS540w2BVoWifCPYLe6EIjgfMeXt9B9h_15GA&s" style="width:100%; height:500px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/12/4e/d2/58/royal-cafe-hazratganj.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://media.weddingz.in/photologue/images/royal-cafe-royal-cafe-hall-1-18.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://www.lucknowportal.com/wp-content/uploads/royal-cafe-basket-chaat.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/07/95/d5/26/royal-cafe.jpg" style="width:100%; height:800px;">
+    </div>
+    <div class="mySlides">
+        <img src="https://image.wedmegood.com/resized/540X/uploads/member/565633/1556351168_11.jpg" style="width:100%; height:800px;">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<div class="offer">
+    <h2>Exclusive Offer: Enjoy 20% Off on Your First Visit!</h2>
+    <p>Indulge in a culinary journey like no other.</p>
+</div>
+
+<div class="why-choose">
+    <h2>Why should you choose Royal Cafe?</h2>
+    <p>At Royal Cafe, we take pride in offering:</p>
+    <ul>
+        <li>Authentic Awadhi cuisine that tantalizes your taste buds.</li>
+        <li>A cozy and inviting ambiance perfect for family gatherings and celebrations.</li>
+        <li>Friendly and attentive service ensuring a memorable dining experience.</li>
+        <li>Exclusive offers and discounts for first-time visitors.</li>
+        <li>Freshly sourced ingredients for the highest quality meals.</li>
+    </ul>
+</div>
+
+<div class="content-wrapper">
+    <section class="booking-section">
+        <h2>Book Your Table Now!</h2>
+        <form>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="tel" placeholder="Contact Number" required>
+            <input type="datetime-local" required>
+            <input type="number" placeholder="Number of Guests" required>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <section class="specialties">
+            <div class="specialty">
+            <h3>Biryani</h3>
+            <p>Lucknowi Biryani</p>
+            <p>Hyderabadi Biryani</p>
+            <p>Mutton Biryani</p>
+            <p>Chicken Biryani</p>
+            <p>Vegetable Biryani</p>
+        </div>
+        <div class="specialty">
+            <h3>Kebabs</h3>
+            <p>Paneer Tikka</p>
+            <p>Shami Kebab</p>
+            <p>Seekh Kebab</p>
+            <p>Galouti Kebab</p>
+            <p>Kakori Kebab</p>
+        </div>
+        <div class="specialty">
+            <h3>Chaat</h3>
+            <p>Basket Chaat</p>
+            <p>Aloo Chaat</p>
+            <p>Papdi Chaat</p>
+            <p>Pani Puri</p>
+            <p>Raj Kachori</p>
+        </div>
+        <div class="specialty">
+            <h3>Mouth-wateries</h3>
+            <p>Samosas</p>
+            <p>Dahi Batasha</p>
+            <p>Kathi Rolls</p>
+            <p>Nihari</p>
+            <p>Chole Bhature</p>
+        </div>
+        <div class="specialty">
+            <h3>Mocktail</h3>
+            <p>Pepsi</p>
+            <p>Falooda</p>
+            <p>Fruit Punch</p>
+            <p>Mojito</p>
+            <p>Pina Colada</p>
+        </div>
+        <div class="specialty">
+            <h3>Desserts</h3>
+            <p>Kulfi</p>
+            <p>Gulab Jamun</p>
+            <p>Suji Halwa</p>
+            <p>Chocolate Brownie</p>
+            <p>Rasmalai</p>
+        </div>
+    </section>
+</div>
+
+<section class="reviews">
+    <h2><u>Customer Reviews:</u></h2>
+    <div class="review">
+        <h3>Aryan Paaji</h3>
+        <p>"The best place for authentic Awadhi cuisine! The biryani is to die for!"</p>
+        <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+    </div>
+    
+    <div class="review">
+        <h3>Sushant Arora</h3>
+        <p>"A perfect blend of taste and tradition. Highly recommend!"</p>
+        <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+        </div>
+    </div>
+    <div class="review">
+        <h3>Anjali Mehta</h3>
+        <p>"Amazing ambiance and delicious food. Can't wait to return!"</p>
+        <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+            <span class="star">&#9734;</span>
+        </div>
+    </div>
+    <h2 id="submitReviewTitle"><u>Submit Your Review:</u></h2>
+    <form id="reviewForm">
+        <input type="text" placeholder="Your Name" required>
+        <textarea placeholder="Your Review" required></textarea>
+        <div class="stars">
+            <span class="star" onclick="setRating(1)">&#9733;</span>
+            <span class="star" onclick="setRating(2)">&#9733;</span>
+            <span class="star" onclick="setRating(3)">&#9733;</span>
+            <span class="star" onclick="setRating(4)">&#9733;</span>
+            <span class="star" onclick="setRating(5)">&#9733;</span>
+        </div>
+        <input type="hidden" id="rating" value="0">
+        <button type="submit">Submit Review</button>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Location:</h3>
+            <p>Hazratganj, Lucknow</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contacts:</h3>
+            <p>Phone: +91 936 9351 936</p>
+            <p>Mobile: +91 522 2627 070</p>
+            <p>Gmail: <a href="mailto:info@royalcafe.in">info@royalcafe.in</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Opening Hours:</h3>
+            <p>10:30 AM - 1:00 AM</p>
+        </div>
+        <div class="footer-section">
+            <h3>Payment Methods:</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Credit-cards.jpg/800px-Credit-cards.jpg" alt="Credit Cards" />
+            <img src="https://m.economictimes.com/thumb/msid-74960608,width-1200,height-900,resizemode-4,imgsize-49172/upi-twitter.jpg" alt="UPI" />
+            <img src="https://razorpay.com/build/browser/static/illustration.50127100.png" alt="Net Banking" />
+        </div>
+    </div>
+    <div class="location-map">
+        <h4>Find Us:</h4>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509149!2d144.95373631531697!3d-37.81627997975101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f0a9a91%3A0x5045675218cee7b!2sYour%20Cafe%20Name!5e0!3m2!1sen!2sau!4v1616161616161!5m2!1sen!2sau" 
+            width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="footer-bottom">
+        <b><h2>@Copyright 2024 Royal Cafe. All rights reserved.</h2></b>
+    </div>
+</footer>
+
+<script>
+    let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    const slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex - 1].style.display = "block";  
+    setTimeout(showSlides, 4000); // Change image every 4 seconds
+}
+
+let loggedIn = false;
+
+function toggleSignIn() {
+    const signInForm = document.getElementById('signInForm');
+    signInForm.style.display = signInForm.style.display === 'none' ? 'block' : 'none';
+}
+
+function signIn() {
+    const username = document.getElementById('username').value;
+    if (username) {
+        loggedIn = true;
+        document.getElementById('signInButton').innerText = `Sign Out (${username})`;
+        document.getElementById('signInForm').style.display = 'none';
+        document.getElementById('username').value = '';
+    }
+}
+
+// Optionally, you can add a sign-out function
+function signOut() {
+    loggedIn = false;
+    document.getElementById('signInButton').innerText = 'Sign In';
+}
+
+function plusSlides(n) {
+    slideIndex += n - 1; // Adjust for the manual navigation
+    showSlides();
+}
+
+function setRating(rating) {
+    document.getElementById('rating').value = rating;
+    const stars = document.querySelectorAll('.stars .star');
+    stars.forEach((star, index) => {
+        star.style.color = index < rating ? 'gold' : 'gray';
+    });
+}
+
+function filterSpecialties() {
+    const input = document.getElementById('searchBar').value.toLowerCase();
+    const specialties = document.querySelectorAll('.specialty');
+
+    specialties.forEach(specialty => {
+        const specialtyName = specialty.querySelector('h3').textContent.toLowerCase();
+        if (specialtyName.includes(input)) {
+            specialty.style.display = '';
+        } else {
+            specialty.style.display = 'none';
+        }
+    });
+}
+
+document.getElementById('reviewForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = this[0].value;
+    const review = this[1].value;
+    const rating = document.getElementById('rating').value;
+
+    const reviewsSection = document.querySelector('.reviews');
+
+    // Create a new review entry
+    const newReview = document.createElement('div');
+    newReview.classList.add('review');
+    newReview.innerHTML = `<h3>${name}</h3><p>"${review}"</p><div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>`;
+
+    // Append new review to the reviews section
+    reviewsSection.insertBefore(newReview, document.getElementById('submitReviewTitle'));
+
+    // Save the review to localStorage
+    saveReviewToLocalStorage(name, review, rating);
+
+    this.reset();
+    setRating(0); // Reset rating
+});
+
+// Function to save review to localStorage
+function saveReviewToLocalStorage(name, review, rating) {
+    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.push({ name, review, rating });
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+}
+
+// Function to load reviews from localStorage
+function loadReviewsFromLocalStorage() {
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.forEach(({ name, review, rating }) => {
+        const reviewsSection = document.querySelector('.reviews');
+        const newReview = document.createElement('div');
+        newReview.classList.add('review');
+        newReview.innerHTML = `<h3>${name}</h3><p>"${review}"</p><div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>`;
+        reviewsSection.insertBefore(newReview, document.getElementById('submitReviewTitle'));
+    });
+}
+
+// Load reviews on page load
+window.onload = loadReviewsFromLocalStorage;
+</script>
+</body>
+</html>
