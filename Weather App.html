@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://png.pngtree.com/thumb_back/fh260/background/20250415/pngtree-sky-with-clouds-and-sun-rays-background-banner-image_17183022.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background 0.5s ease;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0 20px 0;
+            color: #666;
+        }
+
+        form {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: calc(100% - 100px);
+        }
+
+        .autocomplete-suggestions {
+            position: absolute;
+            border: 1px solid #ccc;
+            background: #fff;
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+            width: calc(100% - 100px);
+        }
+
+        .autocomplete-suggestion {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .autocomplete-suggestion:hover {
+            background: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(40, 40, 233);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(86, 86, 243);
+        }
+
+        .loading-spinner {
+            display: none;
+        }
+
+        #weatherResult {
+            display: none;
+        }
+
+        #weatherIcon {
+            width: 80px;
+        }
+
+        .weather-info {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .weather-info span {
+            display: block;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .weather-description {
+            text-transform: capitalize;
+        }
+
+        .forecast-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .forecast-day {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .forecast-day:last-child {
+            border-bottom: none;
+        }
+
+        .forecast-day img {
+            width: 50px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <p>based on OpenWeatherAPI</p>
+        <form id="weatherForm">
+            <input type="text" id="city" placeholder="Enter city name" aria-label="Enter city name" required>
+            <button type="submit">CHECK</button>
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <div class="autocomplete-suggestions" id="autocompleteSuggestions"></div>
+        </form>
+        <div id="weatherResult">
+            <div id="cityName" class="weather-info"></div>
+            <div id="temperature" class="weather-info"></div>
+            <div id="weatherDescription" class="weather-info weather-description"></div>
+            <div id="wind" class="weather-info"></div>
+            <div id="pressure" class="weather-info"></div>
+            <div id="humidity" class="weather-info"></div>
+            <div id="sunrise" class="weather-info"></div>
+            <div id="sunset" class="weather-info"></div>
+            <img id="weatherIcon" alt="Weather Icon">
+        </div>
+        <div class="forecast-container" id="forecastContainer"></div>
+        <footer>Designed & Built by Aryan</footer>
+    </div>
+    <script>
+        const apiKey = '37eaaa91acd524155bf5cee836d656c4'; // Replace with your OpenWeatherMap API key
+
+        document.getElementById('weatherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('city').value;
+            getWeather(city);
+        });
+
+        document.getElementById('city').addEventListener('input', function() {
+            const city = this.value;
+            if (city.length > 2) {
+                getAutocompleteSuggestions(city);
+            } else {
+                document.getElementById('autocompleteSuggestions').innerHTML = '';   
+            }
+        });
+
+        function getWeather(city) {
+            toggleLoadingSpinner(true);
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === '404') {
+                        alert('City not found');
+                        toggleLoadingSpinner(false);
+                        return;
+                    }
+                    displayWeather(data);
+                    getForecast(city);
+                })
+                .catch(error => {
+                    alert('Error fetching weather data');
+                    console.error('Error:', error);
+                    toggleLoadingSpinner(false);
+                });
+        }
+
+        function getForecast(city) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    displayForecast(data);
+                    toggleLoadingSpinner(false);
+                })
+                .catch(error => {
+                    alert('Error fetching forecast data');
+                    console.error('Error:', error);
+                    toggleLoadingSpinner(false);
+                });
+        }
+
+        function getAutocompleteSuggestions(city) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/find?q=${city}&type=like&sort=population&cnt=5&appid=${apiKey}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const suggestions = data.list.map(city => `<div class="autocomplete-suggestion" tabindex="0" onclick="selectCity('${city.name}')">${city.name}, ${city.sys.country}</div>`).join('');
+                    document.getElementById('autocompleteSuggestions').innerHTML = suggestions;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function selectCity(city) {
+            document.getElementById('city').value = city;
+            document.getElementById('autocompleteSuggestions').innerHTML = '';
+            getWeather(city);
+        }
+
+        function displayWeather(data) {
+            document.getElementById('weatherResult').style.display = 'block';
+            document.getElementById('cityName').innerHTML = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').innerHTML = `${data.main.temp} °C`;
+            document.getElementById('weatherDescription').innerHTML = `${data.weather[0].description}`;
+            document.getElementById('wind').innerHTML = `WIND: ${data.wind.speed} m/s`;
+            document.getElementById('pressure').innerHTML = `PRESSURE: ${data.main.pressure} hPa`;
+            document.getElementById('humidity').innerHTML = `HUMIDITY: ${data.main.humidity} %`;
+            document.getElementById('sunrise').innerHTML = `SUNRISE: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}`;
+            document.getElementById('sunset').innerHTML = `SUNSET: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}`;
+            document.getElementById('weatherIcon').src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+
+            // Change background based on weather and time
+            changeBackground(data);
+        }
+
+        function changeBackground(data) {
+            const now = new Date();
+            const sunrise = new Date(data.sys.sunrise * 1000);
+            const sunset = new Date(data.sys.sunset * 1000);
+            const isNight = now < sunrise || now > sunset;
+
+            if (data.weather[0].main.toLowerCase() === 'rain') {
+                document.body.style.background = 'url("https://img.freepik.com/free-vector/dark-clouds-with-rainfall-thunder-flash-background_1017-32181.jpg") no-repeat center center fixed';
+            } else if (isNight) {
+                document.body.style.background = 'url("https://cdn.dribbble.com/users/925716/screenshots/4531553/attachments/1025680/beautiful_night.jpg?resize=400x300&vertical=center") no-repeat center center fixed';
+            } else {
+                document.body.style.background = 'url("https://png.pngtree.com/thumb_back/fh260/background/20250415/pngtree-sky-with-clouds-and-sun-rays-background-banner-image_17183022.jpg") no-repeat center center fixed';
+            }
+            document.body.style.backgroundSize = 'cover';
+        }
+
+        function displayForecast(data) {
+            const forecastContainer = document.getElementById('forecastContainer');
+            forecastContainer.innerHTML = '';
+            const forecasts = data.list.filter(forecast => forecast.dt_txt.includes('12:00:00'));
+            forecasts.forEach(forecast => {
+                const forecastDay = document.createElement('div');
+                forecastDay.classList.add('forecast-day');
+                forecastDay.innerHTML = `
+                    <div>${new Date(forecast.dt * 1000).toLocaleDateString()}</div>
+                    <div><img src="http://openweathermap.org/img/w/${forecast.weather[0].icon}.png" alt="Weather Icon"></div>
+                    <div>${forecast.main.temp} °C</div>
+                `;
+                forecastContainer.appendChild(forecastDay);
+            });
+        }
+
+        function toggleLoadingSpinner(show) {
+            const spinner = document.querySelector('.loading-spinner');
+            spinner.style.display = show ? 'inline-block' : 'none';
+        }
+    </script>
+</body>
+</html>
